@@ -43,5 +43,8 @@
   font-weight: bold;
 }
 
+/* ******* PRODUCT PAGE ******* */
 
-/* ******* ... ******* */
+.product-page-price {
+  font-size: 19px;
+}

@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ProductController extends AbstractController
 {
-    
+
     /**
      * @Route("/nos-produits", name="products")
      */
@@ -21,6 +21,23 @@ class ProductController extends AbstractController
 
         return $this->render('product/index.html.twig', [
             'products' => $products
+        ]);
+    }
+
+    /**
+     * @Route("/produit/{slug}", name="product")
+     */
+    public function show($slug): Response
+    {
+        $repository = $this->getDoctrine()->getRepository(Product::class);
+        $product = $repository->findOneBySlug($slug);
+
+        if (!$product) {
+            return $this->redirectToRoute('products');
+        }
+
+        return $this->render('product/show.html.twig', [
+            'product' => $product
         ]);
     }
 }
