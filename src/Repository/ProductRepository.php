@@ -21,7 +21,7 @@ class ProductRepository extends ServiceEntityRepository
     }
 
     /**
-     * Requête prmettant de récupérer les produits en fonction de la recherche de l'utilisateur
+     * Requête permettant de récupérer les produits en fonction de la recherche de l'utilisateur
      * @return Product[]
      */
     public function findWithSearch(Search $search)

@@ -43,7 +43,7 @@ class ProductController extends AbstractController
     public function show($slug): Response
     {
         $repository = $this->getDoctrine()->getRepository(Product::class);
-        $product = $repository->findOneBySlug($slug);
+        $product = $repository->findOneBy(['slug' => $slug]);
 
         if (!$product) {
             return $this->redirectToRoute('products');
