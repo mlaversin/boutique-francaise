@@ -11,6 +11,11 @@ body {
   color: white;
 }
 
+.cart-icon {
+  height: 18px;
+  padding: 0 20px;
+}
+
 /* ******* FOOTER ******* */
 
 .footer-custom {
