@@ -19,8 +19,14 @@ class CartController extends AbstractController
 
         if($cart->get()) {
             foreach($cart->get() as $id => $quantity) {
+                $product_object = $this->getDoctrine()->getRepository(Product::class)->findOneById($id);
+                if (!$product_object) {
+                    $cart->delete($id);
+                    continue;
+                }
+
                 $cartComplete[] = [
-                    'product' => $this->getDoctrine()->getRepository(Product::class)->findOneById($id),
+                    'product' => $product_object,
                     'quantity' => $quantity
                 ];
             }
