@@ -66,6 +66,20 @@ body {
     letter-spacing: -.05rem;
 }
 
+/* IMAGES
+------------------------- */
+
+
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+
 
 /* RESPONSIVE CSS
 -------------------------------------------------- */
@@ -86,5 +100,11 @@ body {
 @media (min-width: 62em) {
     .featurette-heading {
         margin-top: 7rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+        font-size: 3.5rem;
     }
 }
