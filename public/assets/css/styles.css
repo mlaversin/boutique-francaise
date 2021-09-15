@@ -68,6 +68,26 @@ main {
   font-size: 19px;
 }
 
+/* ******* ORDER PAGE ******* */
+
+.order-summary {
+  background-color: #f2f2f2;
+  padding: 20px;
+  margin-top: 22px;
+}
+
+/* ********** FORM ********** */
+
+.form-check {
+  background-color: #f2f2f2;
+  padding: 20px 65px;
+  margin-top: 7px;
+}
+
+.col-form-label {
+  font-weight: bold;
+}
+
 /* **************************** */
 /* ********** FOOTER ********** */
 /* **************************** */
