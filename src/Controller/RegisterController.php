@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Classes\Mail;
 use App\Form\RegisterType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,6 +27,7 @@ class RegisterController extends AbstractController
      */
     public function index(Request $request): Response
     {
+        $notification = null;
         $user = new User();
         $form = $this->createForm(RegisterType::class, $user);
 
@@ -35,17 +37,30 @@ class RegisterController extends AbstractController
 
             $user = $form->getData();
 
-            $user->setPassword($this->passwordHasher->hashPassword(
-                $user,
-                $user->getPassword()
-                ));
+            $search_email = $this->entityManager->getRepository(User::class)->findOneByEmail($user->getEmail());
 
-            $this->entityManager->persist($user);
-            $this->entityManager->flush();
+            if (!$search_email) {
+                $user->setPassword($this->passwordHasher->hashPassword(
+                    $user,
+                    $user->getPassword()
+                    ));
+    
+                $this->entityManager->persist($user);
+                $this->entityManager->flush();
+
+                $mail = new Mail();
+                $content="Bonjour ".$user->getFirstname()."<br>Bienvenue sur la première boutique 100% dédiée au made in France<br><br>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestiae ullam delectus sit similique voluptatibus praesentium, odit eius est ipsam. Expedita earum, minus non quis itaque consequatur autem possimus ex illo est ut, nihil blanditiis tempore reiciendis iste rem! Repellendus labore autem, quos maxime cum accusamus quis. Vitae itaque asperiores suscipit.";
+                $mail->send($user->getEmail(), $user->getFirstname(), 'Bienvenue sur la Boutique Française', $content);
+
+                $notification = "Votre inscription s'est correctement déroulée. Vous pouvez dès à présent vous connecter à votre compte";
+            } else {
+                $notification = "L'email que vous avez renseigné existe déja.";
+            }
         }
 
         return $this->render('register/index.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'notification' => $notification
         ]);
     }
 }
