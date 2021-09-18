@@ -17,7 +17,7 @@ class StripeController extends AbstractController
     /**
      * @Route("/commande/create-session/{reference}", name="stripe_create_session")
      */
-    public function index(EntityManagerInterface $entityManager, $reference): Response
+    public function index(EntityManagerInterface $entityManager, $reference, $stripeSK): Response
     {
         $products_for_stripe = [];
         $YOUR_DOMAIN = 'http://127.0.0.1:8000';
@@ -55,7 +55,7 @@ class StripeController extends AbstractController
             'quantity' => 1,
         ];
 
-        Stripe::setApiKey('');
+        Stripe::setApiKey($stripeSK);
 
             
         $checkout_session = Session::create([
@@ -67,9 +67,13 @@ class StripeController extends AbstractController
                 'card',
             ],
             'mode' => 'payment',
-            'success_url' => $YOUR_DOMAIN . '/success.html',
-            'cancel_url' => $YOUR_DOMAIN . '/cancel.html',
+            'success_url' => $YOUR_DOMAIN . '/commande/merci/{CHECKOUT_SESSION_ID}',
+            'cancel_url' => $YOUR_DOMAIN . '/commande/erreur/{CHECKOUT_SESSION_ID}',
         ]);
+
+        $order->setStripeSessionId($checkout_session->id);
+
+        $entityManager->flush();
 
         $response = new JsonResponse(['id' => $checkout_session->id]);
 
