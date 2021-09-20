@@ -18,4 +18,15 @@
         </div>
     </div>
 
+    <hr>
+
+    <h2>Nos meilleures ventes</h2>
+    <p>Découvrez les articles les plus vendus sur La Boutique Française.</p>
+    <div class="row">
+        {% for product in products %}
+            <div class="col-md-3">
+                {% include "product/single_product.html.twig" %}
+            </div>
+        {% endfor %}
+
 {% endblock %}
