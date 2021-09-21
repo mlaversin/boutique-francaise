@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nous contacter - La Boutique Française{% endblock %}
+
+{% block content %}
+
+    <h1>Nous contacter</h1>
+    <p>N'hésitez pas à prendre contact avec notre équipe, nous vous répondrons dans les meilleurs délais.</p>
+
+    {% for message in app.flashes('notice') %}
+        <div class="alert alert-info">{{ message }}</div>
+    {% endfor %}
+
+    <div class="row">
+        <div class="col-md-8">
+            {{ form(form) }}
+        </div>
+        <div class="col-md-4">
+            <b>La Boutique Française</b>
+            <hr>
+            <p>06 10 20 30 40</p>
+            <p>176 rue des Amandiers <br> 75000 PARIS</p>
+            <p>contact@laboutiquefrancaise.fr</p>
+        </div>
+    </div>
+
+{% endblock %}
