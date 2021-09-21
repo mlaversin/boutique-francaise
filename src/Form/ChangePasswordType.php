@@ -20,14 +20,14 @@ class ChangePasswordType extends AbstractType
             ->add('email', EmailType::class, [
                 'disabled' => true
             ])
-            ->add('firstname', TextType::class, [
-                'disabled' => true,
-                'label' => 'Prénom'
-                ])
-            ->add('lastname', TextType::class, [
-                'disabled' => true,
-                'label' => 'Nom'
-                ])
+            // ->add('firstname', TextType::class, [
+            //     'disabled' => true,
+            //     'label' => 'Prénom'
+            //     ])
+            // ->add('lastname', TextType::class, [
+            //     'disabled' => true,
+            //     'label' => 'Nom'
+            //     ])
             ->add('old_password', PasswordType::class , [
                 'label' => 'Mot de passe actuel',
                 'mapped' => false,
@@ -55,7 +55,10 @@ class ChangePasswordType extends AbstractType
                 ],
             ])
             ->add('submit', SubmitType::class, [
-                'label' => 'Mettre à jour'
+                'label' => 'Mettre à jour',
+                'attr' => [
+                    'class' =>'btn-info'
+                ]
             ])
         ;
     }
