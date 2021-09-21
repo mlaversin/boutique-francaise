@@ -102,6 +102,11 @@ main {
   font-weight: bold;
 }
 
+.account-item a:hover {
+  color: #778ca3;
+  text-decoration: none;
+}
+
 /* **************************** */
 /* ********** FOOTER ********** */
 /* **************************** */
