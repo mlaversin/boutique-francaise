@@ -5,7 +5,7 @@
 {% block content %}
     <h1>Mon compte</h1>
     {% if is_granted('ROLE_ADMIN') %}
-        <small><a href="{{ path('account_password') }}">Accéder à l'espace administrateur</a></small><br/>
+        <small><a href="/admin">Accéder à l'espace administrateur</a></small><br/>
     {% endif %}
 
     Bienvenue dans votre compte, {{ app.user.firstname }}.<br/>
